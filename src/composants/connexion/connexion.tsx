@@ -1,25 +1,44 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import './connexion.css'
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../services/req";
 
 function Connexion() {
   const [email, setEmail] = useState("");
+  const [emailExist, setEmailExist] = useState(false);
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-  const navigate = useNavigate();
-
-  const handleEmailChange = (event: { target: { value: SetStateAction<string>; }; }) => setEmail(event.target.value);
-  const handlePasswordChange = (event: { target: { value: SetStateAction<string>; }; }) => setPassword(event.target.value);
   const handleRememberMeChange = () => setRememberMe(!rememberMe);
 
-  const handleConnexion = () => {
-    
-    login(email, password)
-    navigate('/');
+  const navigate = useNavigate();
+
+  // @ts-ignore
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    setEmailExist(false)
+    setEmail(email);
+    setPassword(password);
+
+    try {
+      await axios.post('http://localhost:3000/admin/login', {
+        mail: email,
+        password: password
+      }).then((response) => {
+        const token = response.data.message;
+        sessionStorage.setItem('id', JSON.stringify(token));
+        console.log(token);
+      });
+      navigate("/");
+    }
+    catch (e) {
+      // @ts-ignore
+      if (e.response.request.response.includes("email")) {
+        setEmailExist(true)
+      }
+    }
   };
-  
 
   const handleForgotPassword = () => {
     console.log("Redirection vers la page de réinitialisation de mot de passe");
@@ -29,15 +48,20 @@ function Connexion() {
     <>
       <div className="connexion">
         <h1>Connexion</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="inputDiv">
             <div>
               <label className="labelRemember" htmlFor="email">Email :</label>
-              <input type="email" id="email" value={email} onChange={handleEmailChange} />
+              <input type="email" id="email" value={email} required={true} onChange={(event) =>
+                setEmail(event.target.value)
+              } />
+              {emailExist ? <p>Mauvais mail ou mot de passe</p> : ""}
             </div>
             <div>
               <label className="labelRemember inputPadding" htmlFor="password">Mot de passe :</label>
-              <input type="password" id="password" value={password} onChange={handlePasswordChange} />
+              <input type="password" id="password" value={password} required={true} onChange={(event) =>
+                setPassword(event.target.value)
+              } />
             </div>
           </div>
           <div className="checkbox-forget">
@@ -50,7 +74,7 @@ function Connexion() {
             </div>
           </div>
           <div className="buttonDiv">
-            <button className='buttonPadding button' type="button" onClick={handleConnexion}>Connexion</button>
+            <button className='buttonPadding button' type="submit">Connexion</button>
           </div>
         </form>
       </div>
