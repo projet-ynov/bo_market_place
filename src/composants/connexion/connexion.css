@@ -1,0 +1,135 @@
+.inputDiv {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    .inputPadding{
+        margin-top: 10px;
+    }
+
+}
+
+.buttonDiv {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    .buttonPadding{
+        margin-bottom: 10px;
+    };
+    .button {
+        background-color: #0B7697;
+    }
+}
+
+.checkbox-forget {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px ;
+    margin-top: 10px;
+    .checkboxDiv{
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+    }
+    .rememberMe {
+        width: auto;
+        size: 10px;
+        align-items: baseline;
+    }
+    .labelRemember{
+        color: #0B7697;
+        font-size: 016px;
+    }
+    .forgetDiv{
+        display: flex;
+        flex-direction:row-reverse;
+        align-items: baseline;
+        .forget {
+            color: #0B7697;
+        }
+        .p-forget {
+            margin-block-start: 0%;
+            margin-block-end: 0%;
+        }
+    }
+}
+
+.labelRemember{
+    color: #0B7697;
+    font-size: 1rem;
+    align-items: center;
+}
+
+.connexion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+}
+
+h1 {
+    color: #0B7697;
+}
+
+container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+form {
+    background-color: #fff;
+    border-radius: 10px;
+    border: 3px solid #0B7697;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    box-sizing: border-box;
+    width: 95%;
+}
+
+title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 3px solid #0B7697;
+    color: #0B7697;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+btn {
+    background-color: #0B7697;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+forgot-password {
+    text-align: center;
+    margin-top: 20px;
+}

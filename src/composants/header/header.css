@@ -1,0 +1,32 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    padding: 15px 15px 15px 15px;
+    border-bottom: solid 0.3em #0B7697;
+}
+
+.left-buttons {
+    display: flex;
+    align-items: center;
+    gap: 50%;    
+    margin-left: 2.5%;
+}
+
+.right-buttons {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-right: 2.5%;
+}
+
+.icons {
+    color: #ffffff;
+}
+
+.buttons {
+    color:#ffffff;
+    background-color: #0B7697;
+}

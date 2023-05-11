@@ -1,0 +1,35 @@
+.users {
+    display: flex;
+    background-color: #ffffff;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.title {
+    display: flex;
+    color: #0B7697;
+    margin-left: 7%;
+    font-size: 2em;
+    margin-top: 2%
+}
+
+.table {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.button-annonce {
+    background-color: #073847;
+}
+
+.button-moderation {
+    background-color: #b4a308;
+}
+
+.button-edition {
+    background-color: #da4906;
+}
+
+.colomn {
+    text-align: center;
+}

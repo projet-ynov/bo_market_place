@@ -1,0 +1,45 @@
+.custom-modal-class {
+    width: 100%; 
+    max-width: 80%!important;
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+    max-width: 100%!important;
+  }
+  
+
+.button-annonce {
+    background-color: #073847;
+}
+
+.popupAnnonce {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+    padding: 5% 5% 5% 5%;
+    box-sizing: border-box
+}
+
+.buttonDivAnnonce {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    .buttonPadding{
+        margin-bottom: 10px;
+    };
+    .button {
+        background-color: #0B7697;
+    }
+    
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0%;
+    padding: 10px 10px 40px 10px;
+}
