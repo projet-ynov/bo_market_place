@@ -30,7 +30,7 @@ function Connexion() {
         sessionStorage.setItem('id', JSON.stringify(token));
         console.log(token);
       });
-      navigate("/");
+      navigate("/app/users");
     }
     catch (e) {
       // @ts-ignore
@@ -55,7 +55,7 @@ function Connexion() {
               <input type="email" id="email" value={email} required={true} onChange={(event) =>
                 setEmail(event.target.value)
               } />
-              {emailExist ? <p>Mauvais mail ou mot de passe</p> : ""}
+              {emailExist ? <p className='falseInput'>Mauvais mail ou mot de passe</p> : ""}
             </div>
             <div>
               <label className="labelRemember inputPadding" htmlFor="password">Mot de passe :</label>

@@ -1,3 +1,7 @@
+.falseInput{
+    color: red;
+}
+
 .inputDiv {
     display: flex;
     flex-direction: column;

@@ -1,4 +1,5 @@
-import './users.css'
+import React, { useEffect, useState } from 'react';
+import './users.css';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -8,13 +9,14 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import PopupAnnonce from '../popupAnnonce/annonce';
-
+import PopupEdition from '../popupEdition/edition';
+import axios from 'axios';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: "#0B7697",
+        backgroundColor: '#0B7697',
         color: theme.palette.common.white,
-        "font-family": "inherit",
+        'font-family': 'inherit',
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
@@ -31,29 +33,28 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(
-    id: number,
-    email: string,
-    pseudo: string,
-) {
-    return { id, email, pseudo };
-}
-
-const rows = [
-    createData(1, "florian.leborgne@gmail.com", "FloLo-Swipe"),
-    createData(2, "axel.figerou@gmail.com", "Groudse"),
-    createData(3, "romain.martin@gmail.com", "Show"),
-    createData(4, "romain.martin@gmail.com", "Show"),
-    createData(5, "romain.martin@gmail.com", "Show"),
-];
-
 function Users() {
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
+    const fetchUsers = async () => {
+        try {
+            const response = await axios.get('http://localhost:3000/users');
+            const usersData = response.data;
+            setUsers(usersData);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des utilisateurs :', error);
+        }
+    };
 
     return (
         <>
-            <div className='users'>
-                <h1 className='title'>USERS</h1>
-                <div className='table'>
+            <div className="users">
+                <h1 className="title">USERS</h1>
+                <div className="table">
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 650, minHeight: 600 }} aria-label="simple table">
                             <TableHead>
@@ -62,41 +63,32 @@ function Users() {
                                     <StyledTableCell align="center">Email</StyledTableCell>
                                     <StyledTableCell align="center">Pseudo</StyledTableCell>
                                     <StyledTableCell align="center">Annonces</StyledTableCell>
-                                    <StyledTableCell align="center">Modération</StyledTableCell>
                                     <StyledTableCell align="center">Edition</StyledTableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rows.map((row) => (
-                                    <StyledTableRow
-                                        key={row.id}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
+                                {users.map((user, index) => (
+                                    <StyledTableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                         <TableCell component="th" scope="row">
-                                            {row.id}
+                                            {index + 1}
                                         </TableCell>
-                                        <TableCell align="center">{row.email}</TableCell>
-                                        <TableCell align="center">{row.pseudo}</TableCell>
+                                        <TableCell align="center">{user.mail}</TableCell>
+                                        <TableCell align="center">{user.username}</TableCell>
                                         <TableCell align="center">
                                             <PopupAnnonce />
                                         </TableCell>
                                         <TableCell align="center">
-                                            <button className='button-moderation'>Modérer</button>
+                                            <PopupEdition userId={user._id} />
                                         </TableCell>
-                                        <TableCell align="center">
-                                            <button className='button-edition'>Editer</button>
-                                        </TableCell>
-
                                     </StyledTableRow>
                                 ))}
                             </TableBody>
                         </Table>
                     </TableContainer>
-
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-export default Users
+export default Users;

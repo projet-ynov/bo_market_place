@@ -1,0 +1,64 @@
+.photoProfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.photoProfil canvas {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+input{
+    margin-bottom: 30px;
+}
+
+.custom-modal-class {
+    width: 100%; 
+    max-width: 80%!important;
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+    max-width: 100%!important;
+  }
+  
+
+.button-edition {
+    background-color: #da4906;
+}
+
+.popupEdition {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+    height: 856px;
+    padding: 5% 5% 5% 5%;
+    box-sizing: border-box
+}
+
+.buttonDivEdition {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content:center;
+    align-items: center;
+    .buttonPadding{
+        margin-bottom: 10px;
+    };
+    .button {
+        background-color: #0B7697;
+    }
+    
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0%;
+    padding: 10px 10px 40px 10px;
+}
