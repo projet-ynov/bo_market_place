@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import './edition.css';
 import { ModelAnnonce } from '../../services/model';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
     // @ts-ignore
 function PopupEdition({ userId }) {
@@ -12,32 +13,34 @@ function PopupEdition({ userId }) {
     const [mail, setEmail] = useState(userData ? userData.mail : "");
     const [password, setPassword] = useState(userData ? userData.password : "");
     const [username, setUsername] = useState(userData ? userData.username : "");
+    const [city, setCity] = useState(userData ? userData.city : "");
     const [profilePhoto, setProfilePhoto] = useState(null);
+
+    const navigate = useNavigate();
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null); // Assurez-vous d'ajouter la référence avec le bon type
 
     // @ts-ignore
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // try {
-        //   await axios.post('http://localhost:3000/admin/login', {
-        //     mail: email,
-        //     password: password
-        //   }).then((response) => {
-        //     const token = response.data.message;
-        //     sessionStorage.setItem('id', JSON.stringify(token));
-        //     console.log(token);
-        //   });
-        //   navigate("/app/users");
-        // }
-        // catch (e) {
-        // @ts-ignore
-        //   if (e.response.request.response.includes("email")) {
-        //     setEmailExist(true)
-        //   }
-        // }
-    };
-
+        try {
+          await axios.put(`http://localhost:3000/user/${userId}`, {
+            username: username,
+            password: password,
+            mail: mail,
+            city: city
+          }).then((response) => {
+            const token = response.data.message;
+            sessionStorage.setItem('id', JSON.stringify(token));
+            console.log(token);
+            window.location.reload(); // Rafraîchir la page
+          });
+          navigate("/app/users");
+        } catch (error) {
+          console.error('Erreur lors de la mise à jour de l\'utilisateur :', error);
+        }
+      };
+      
     
     const fetchUserData = async () => {
         try {
@@ -47,6 +50,7 @@ function PopupEdition({ userId }) {
           setEmail(userData.mail);
           setPassword(userData.password);
           setUsername(userData.username);
+          setCity(userData.city);
         } catch (error) {
           console.error('Erreur lors de la récupération des données de l\'utilisateur :', error);
         }
@@ -74,6 +78,11 @@ function PopupEdition({ userId }) {
     // @ts-ignore
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
+    };
+
+    // @ts-ignore
+    const handleCityChange = (event) => {
+        setCity(event.target.value);
     };
 
     // @ts-ignore
@@ -130,9 +139,7 @@ function PopupEdition({ userId }) {
 
     return (
         <>
-            <button className="button-edition" onClick={handleOpen}>
-                Edition
-            </button>
+            <button className="button-edition" onClick={handleOpen}>Edition</button>
             <Dialog open={open} onClose={handleClose}>
                 <div className="popupEdition">
                     <h1 className="title">Edition du compte</h1>
@@ -180,6 +187,16 @@ function PopupEdition({ userId }) {
                                     id="password"
                                     value={password}
                                     onChange={handlePasswordChange}
+                                />
+                            </div>
+
+                            <div className="inputDiv">
+                                <label htmlFor="city">Ville :</label>
+                                <input
+                                    type="city"
+                                    id="city"
+                                    value={city}
+                                    onChange={handleCityChange}
                                 />
                             </div>
 

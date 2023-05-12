@@ -34,10 +34,11 @@ input{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 1000px;
+    width: 600px;
     height: 856px;
     padding: 5% 5% 5% 5%;
-    box-sizing: border-box
+    box-sizing: border-box;
+    transform: scale(0.9);
 }
 
 .buttonDivEdition {

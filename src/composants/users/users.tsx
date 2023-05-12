@@ -60,8 +60,10 @@ function Users() {
                             <TableHead>
                                 <TableRow>
                                     <StyledTableCell>ID</StyledTableCell>
+                                    <StyledTableCell align="center">Photo</StyledTableCell>
                                     <StyledTableCell align="center">Email</StyledTableCell>
-                                    <StyledTableCell align="center">Pseudo</StyledTableCell>
+                                    <StyledTableCell align="center">Username</StyledTableCell>
+                                    <StyledTableCell align="center">Ville</StyledTableCell>
                                     <StyledTableCell align="center">Annonces</StyledTableCell>
                                     <StyledTableCell align="center">Edition</StyledTableCell>
                                 </TableRow>
@@ -72,8 +74,10 @@ function Users() {
                                         <TableCell component="th" scope="row">
                                             {index + 1}
                                         </TableCell>
+                                        <TableCell align="center">{user.photo}</TableCell>
                                         <TableCell align="center">{user.mail}</TableCell>
                                         <TableCell align="center">{user.username}</TableCell>
+                                        <TableCell align="center">{user.city}</TableCell>
                                         <TableCell align="center">
                                             <PopupAnnonce />
                                         </TableCell>
