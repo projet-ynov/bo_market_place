@@ -17,7 +17,7 @@ function Header() {
     } else if (buttonClicked === "notifications") {
       navigate('/app/notifications');
     } else if (buttonClicked === "exit") {
-      sessionStorage.removeItem("id");
+      sessionStorage.removeItem("token");
       navigate('/authentification/connexion');
     }
   }

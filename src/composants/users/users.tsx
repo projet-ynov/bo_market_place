@@ -34,7 +34,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function Users() {
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState<User[]>([]);
+    const DEFAULT_IMAGE_URL = './../../../public/icon-user.png';
 
     useEffect(() => {
         fetchUsers();
@@ -74,12 +75,18 @@ function Users() {
                                         <TableCell component="th" scope="row">
                                             {index + 1}
                                         </TableCell>
-                                        <TableCell align="center">{user.photo}</TableCell>
+                                        <TableCell align="center">
+                                                {user && user.photo ? (
+                                                    <img src={"data:image/png;base64," + user.photo} alt="Profile" className="photoImg" />
+                                                ) : (
+                                                    <img src={DEFAULT_IMAGE_URL} alt="Profile" className="photoImg" />
+                                                )}
+                                        </TableCell>
                                         <TableCell align="center">{user.mail}</TableCell>
                                         <TableCell align="center">{user.username}</TableCell>
                                         <TableCell align="center">{user.city}</TableCell>
                                         <TableCell align="center">
-                                            <PopupAnnonce />
+                                            <PopupAnnonce userId={user._id}/>
                                         </TableCell>
                                         <TableCell align="center">
                                             <PopupEdition userId={user._id} />

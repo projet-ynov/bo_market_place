@@ -121,6 +121,7 @@ input {
     font-size: 1.2rem;
     box-sizing: border-box;
     background-color: #ffffff;
+    margin-bottom: 5px;
 }
 
 btn {

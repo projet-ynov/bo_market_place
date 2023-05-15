@@ -27,7 +27,7 @@ function Connexion() {
         password: password
       }).then((response) => {
         const token = response.data.message;
-        sessionStorage.setItem('id', JSON.stringify(token));
+        sessionStorage.setItem('token', JSON.stringify(token));
         console.log(token);
       });
       navigate("/app/users");
@@ -66,11 +66,6 @@ function Connexion() {
           </div>
           <div className="checkbox-forget">
             <div className="checkboxDiv">
-              <input type="checkbox" id="rememberMe" className="rememberMe" checked={rememberMe} onChange={handleRememberMeChange} />
-              <label className="labelRemember" htmlFor="rememberMe">Se souvenir de moi</label>
-            </div>
-            <div className="forgetDiv">
-              <p className="p-forget"><a className='forget' href="#" onClick={handleForgotPassword}>Mot de passe oublié ?</a></p>
             </div>
           </div>
           <div className="buttonDiv">

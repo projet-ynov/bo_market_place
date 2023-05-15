@@ -26,12 +26,19 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    margin-bottom: 30px;
     justify-content: space-between;
     .buttonPadding{
         margin-bottom: 10px;
     };
     .button {
         background-color: #0B7697;
+    }
+    .marginPadding {
+        margin-right: 20px;
+    }
+    .modifButton {
+        margin-left: 300px
     }
     
 }
