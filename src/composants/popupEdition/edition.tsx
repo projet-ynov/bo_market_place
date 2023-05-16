@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 function PopupEdition({ userId }) {
     const [open, setOpen] = useState(false);
 
-    const [userData, setUserData] = useState<User>();
+    const [userData, setUserData] = useState<UserModel>();
     const [mail, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");

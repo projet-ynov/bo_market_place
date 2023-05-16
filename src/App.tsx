@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import MainRoutes from "./services/Routes/routes";
 import ConnexionRoutes from "./services/Routes/connexionRoutes";
-import Notifications from "./composants/notifications/notifications";
+import Notifications from "./composants/tickets/tickets";
 import io from 'socket.io-client';
 
 function App() {

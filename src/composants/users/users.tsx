@@ -34,7 +34,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function Users() {
-    const [users, setUsers] = useState<User[]>([]);
+    const [users, setUsers] = useState<UserModel[]>([]);
     const DEFAULT_IMAGE_URL = './../../../public/icon-user.png';
 
     useEffect(() => {

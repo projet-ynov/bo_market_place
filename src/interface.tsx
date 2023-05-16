@@ -7,6 +7,7 @@ interface ModelAnnonce {
   date: string;
   location: string;
   profil: UserModel;
+  status: number;
 }
 
 interface UserModel {
@@ -24,6 +25,13 @@ interface Image {
 interface ModelAnnonceBuy {
   user: UserModel;
   annonce: ModelAnnonce;
+}
+
+interface ModelMessages {
+  title: string;
+  description: string;
+  date: string;
+  profilUser: UserModel
 }
 
 
