@@ -10,8 +10,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import PopupAnnonce from '../popupAnnonce/annonce';
-import PopupEdition from '../popupEdition/edition';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -109,6 +107,13 @@ function Tickets() {
     }
   };
 
+  // Tri des messages par ordre décroissant de la date
+  const sortedMessages = messages.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB: Date = new Date(b.date); // Spécifiez le type Date ici
+    return dateB.getTime() - dateA.getTime(); // Utilisez getTime() pour obtenir la valeur numérique de la date
+  });
+
   return (
     <div>
       {/* <input
@@ -134,14 +139,13 @@ function Tickets() {
                 <TableRow>
                   <StyledTableCell>ID</StyledTableCell>
                   <StyledTableCell align="center">Title</StyledTableCell>
-                  <StyledTableCell align="center">User</StyledTableCell>
                   <StyledTableCell align="center">Email</StyledTableCell>
                   <StyledTableCell align="center">Date</StyledTableCell>
                   <StyledTableCell align="center">Description</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {messages.map((message, index) => (
+                {sortedMessages.map((message, index) => (
                   <StyledTableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                     <TableCell component="th" scope="row">
                       {index + 1}
@@ -154,7 +158,6 @@ function Tickets() {
                         </React.Fragment>
                       ))}
                     </TableCell>
-                    <TableCell align="center">{message.profilUser.username}</TableCell>
                     <TableCell align="center">{message.profilUser.mail}</TableCell>
                     <TableCell align="center">{new Date(message.date).toLocaleDateString('fr-FR')}</TableCell>
                     <TableCell align="center">

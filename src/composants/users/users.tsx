@@ -11,6 +11,7 @@ import { styled } from '@mui/material/styles';
 import PopupAnnonce from '../popupAnnonce/annonce';
 import PopupEdition from '../popupEdition/edition';
 import axios from 'axios';
+import { io } from 'socket.io-client';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -36,9 +37,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 function Users() {
     const [users, setUsers] = useState<UserModel[]>([]);
     const DEFAULT_IMAGE_URL = './../../../public/icon-user.png';
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [socket, setSocket] = useState<any>(null);
 
     useEffect(() => {
         fetchUsers();
+
+        const socket = io('http://localhost:3000');
+        setSocket(socket);
+
+        return () => {
+            socket.disconnect();
+        };
     }, []);
 
     const fetchUsers = async () => {
@@ -47,7 +58,27 @@ function Users() {
             const usersData = response.data;
             setUsers(usersData);
         } catch (error) {
-            console.error('Erreur lors de la récupération des utilisateurs :', error);
+            console.error('Erreur lors de la récupération des utilisateurs:', error);
+        }
+    };
+
+    const sendMessage = () => {
+        const userId = '645d2661a5eb455459ce61b0';
+        const date = new Date();
+
+        if (title && description && userId && socket) {
+            const message = {
+                title,
+                description,
+                userId,
+                date,
+            };
+
+            console.log('Emitting ticket message');
+            socket.emit('ticket', message);
+
+            setTitle('');
+            setDescription('');
         }
     };
 
@@ -76,17 +107,17 @@ function Users() {
                                             {index + 1}
                                         </TableCell>
                                         <TableCell align="center">
-                                                {user && user.photo ? (
-                                                    <img src={"data:image/png;base64," + user.photo} alt="Profile" className="photoImg" />
-                                                ) : (
-                                                    <img src={DEFAULT_IMAGE_URL} alt="Profile" className="photoImg" />
-                                                )}
+                                            {user && user.photo ? (
+                                                <img src={'data:image/png;base64,' + user.photo} alt="Profile" className="photoImg" />
+                                            ) : (
+                                                <img src={DEFAULT_IMAGE_URL} alt="Profile" className="photoImg" />
+                                            )}
                                         </TableCell>
                                         <TableCell align="center">{user.mail}</TableCell>
                                         <TableCell align="center">{user.username}</TableCell>
                                         <TableCell align="center">{user.city}</TableCell>
                                         <TableCell align="center">
-                                            <PopupAnnonce userId={user._id}/>
+                                            <PopupAnnonce userId={user._id} />
                                         </TableCell>
                                         <TableCell align="center">
                                             <PopupEdition userId={user._id} />
