@@ -27,8 +27,11 @@ function Connexion() {
         password: password
       }).then((response) => {
         const token = response.data.message;
+        const admin = response.data.admin;
         sessionStorage.setItem('token', JSON.stringify(token));
+        sessionStorage.setItem('admin', JSON.stringify(admin));
         console.log(token);
+
       });
       navigate("/app/users");
     }

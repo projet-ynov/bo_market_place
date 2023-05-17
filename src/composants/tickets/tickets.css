@@ -1,3 +1,21 @@
 li{
     color: black;
 }
+
+.table {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.button-reserve {
+    background-color: rgb(36, 30, 4);
+}
+
+.button-reserveOFF {
+    background-color: #073847;
+  }
+  
+
+.button-supp {
+    background-color: #da4906;
+}

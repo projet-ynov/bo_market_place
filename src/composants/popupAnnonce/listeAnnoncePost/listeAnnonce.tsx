@@ -40,6 +40,7 @@ const formatDate = (date: string) => {
 
 function ListeAnnonces({ annonces }: ListeAnnoncesProps) {
   const typeAnnonce = sessionStorage.getItem('typeAnnonce');
+  
   const deleteAnnonce = async (annonceId: string, status: number) => {
     if (status === 0) {
       try {
@@ -50,12 +51,16 @@ function ListeAnnonces({ annonces }: ListeAnnoncesProps) {
         });
       } catch (error) {
         console.error("Erreur lors de la suppression de l'annonce :", error);
+        alert("Erreur lors de la suppression de l'annonce : " + error);
+
       }
     } else {
       console.log("Impossible de supprimer l'annonce. Elle est vendue.");
+      alert("Impossible de supprimer l'annonce. Elle est vendue.");
+
     }
   };
-  
+
   return (
     <div className="tableAnnonce">
       <TableContainer component={Paper}>

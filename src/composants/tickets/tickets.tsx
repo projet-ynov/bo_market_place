@@ -81,29 +81,43 @@ function Tickets() {
 
   const fetchTickets = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/message/messages'); // Remplacez l'URL par votre route pour récupérer les tickets
-      setMessages(response.data);
+      const response = await axios.get('http://localhost:3000/message/messages');
+      const updatedMessages = response.data.map((message: ModelMessages) => {
+        return {
+          ...message,
+        };
+      });
+      setMessages(updatedMessages);
     } catch (error) {
       console.error('Erreur lors de la récupération des tickets :', error);
     }
   };
 
-  const sendMessage = () => {
-    const userId = "645d2661a5eb455459ce61b0"
-    const date = new Date();
-
-    if (title && description && userId && socket) {
-      const message = {
-        title,
-        description,
-        userId,
-        date,
-      };
-
-      socket.emit('ticket', message);
-
-      setTitle('');
-      setDescription('');
+  const reserveTicket = (ticketId: string) => {
+    const reservedTicket = messages.find((message) => message._id === ticketId);
+    if (reservedTicket) {
+      // Vérifiez si le ticket est déjà réservé par un autre administrateur
+      if (reservedTicket.reservedBy) {
+        alert('Ce ticket est déjà réservé par un autre administrateur.');
+      } else {
+        const adminString = sessionStorage.getItem("admin");
+        const admin: AdminModel = adminString ? JSON.parse(adminString) : null;
+        const reservedBy = admin?._id;
+        console.log(reservedBy);
+        const updatedMessages = messages.map((message) => {
+          if (message._id === ticketId) {
+            return {
+              ...message,
+              reservedBy: reservedBy,
+            };
+          }
+          return message;
+        });
+        setMessages(updatedMessages);
+        console.log(ticketId, reservedBy);
+        // Appelez votre API pour mettre à jour le ticket dans la base de données avec la propriété reservedBy
+        axios.put(`http://localhost:3000/message/updateMessage/${ticketId}`, { reservedBy: reservedBy });
+      }
     }
   };
 
@@ -114,22 +128,19 @@ function Tickets() {
     return dateB.getTime() - dateA.getTime(); // Utilisez getTime() pour obtenir la valeur numérique de la date
   });
 
+  const deleteTicket = async (ticketId: string) => {
+    try {
+      await axios.delete(`http://localhost:3000/message/delete/${ticketId}`);
+      // Mettez à jour la liste des messages après la suppression réussie
+      setMessages((prevMessages) => prevMessages.filter((message) => message._id !== ticketId));
+    } catch (error) {
+      console.error("Erreur lors de la suppression du ticket :", error);
+      alert("Erreur lors de la suppression du ticket");
+    }
+  };
+
   return (
     <div>
-      {/* <input
-        type="text"
-        placeholder="Titre"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <button onClick={sendMessage}>Envoyer un message</button> */}
-
       <div className="users">
         <h1 className="title">TICKETS</h1>
         <div className="table">
@@ -142,6 +153,8 @@ function Tickets() {
                   <StyledTableCell align="center">Email</StyledTableCell>
                   <StyledTableCell align="center">Date</StyledTableCell>
                   <StyledTableCell align="center">Description</StyledTableCell>
+                  <StyledTableCell align="center">Réserver</StyledTableCell>
+                  <StyledTableCell align="center">Delete</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -167,6 +180,12 @@ function Tickets() {
                           <br />
                         </React.Fragment>
                       ))}
+                    </TableCell>
+                    <TableCell align="center">
+                    <button className={`button-reserve ${message.reservedBy === undefined ? 'button-reserveOFF' : ''}`} onClick={() => reserveTicket(message._id)}>Réserver</button>
+                    </TableCell>
+                    <TableCell align="center">
+                      <button className="button-supp" onClick={() => deleteTicket(message._id)}>Supprimer</button>
                     </TableCell>
                   </StyledTableRow>
                 ))}

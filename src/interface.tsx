@@ -18,6 +18,12 @@ interface UserModel {
   city: string;
 }
 
+interface AdminModel {
+  _id: string;
+  username: string;
+  mail: string;
+}
+
 interface Image {
   image: string;
 }
@@ -28,10 +34,12 @@ interface ModelAnnonceBuy {
 }
 
 interface ModelMessages {
+  _id: string;
   title: string;
   description: string;
   date: string;
-  profilUser: UserModel
+  profilUser: UserModel;
+  reservedBy: string
 }
 
 

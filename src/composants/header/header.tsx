@@ -20,7 +20,7 @@ function Header() {
       setHasNewTickets(false); // Reset the new tickets flag when navigating to the tickets page
       navigate('/app/tickets');
     } else if (buttonClicked === "exit") {
-      sessionStorage.removeItem("token");
+      sessionStorage.clear();
       navigate('/authentification/connexion');
     }
   };
