@@ -111,23 +111,20 @@ function Tickets() {
           return message;
         });
         setMessages(updatedMessages);
-        // Appelez votre API pour mettre à jour le ticket dans la base de données avec la propriété reservedBy
         axios.put(`http://localhost:3000/message/updateMessage/${ticketId}`, { reservedBy: reservedBy });
       }
     }
   };
 
-  // Tri des messages par ordre décroissant de la date
   const sortedMessages = messages.sort((a, b) => {
     const dateA = new Date(a.date);
-    const dateB: Date = new Date(b.date); // Spécifiez le type Date ici
-    return dateB.getTime() - dateA.getTime(); // Utilisez getTime() pour obtenir la valeur numérique de la date
+    const dateB: Date = new Date(b.date); 
+    return dateB.getTime() - dateA.getTime();
   });
 
   const deleteTicket = async (ticketId: string) => {
     try {
       await axios.delete(`http://localhost:3000/message/delete/${ticketId}`);
-      // Mettez à jour la liste des messages après la suppression réussie
       setMessages((prevMessages) => prevMessages.filter((message) => message._id !== ticketId));
     } catch (error) {
       console.error("Erreur lors de la suppression du ticket :", error);

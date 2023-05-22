@@ -1,17 +1,16 @@
 import { Dialog } from '@mui/material';
 import { useEffect, useState } from 'react';
 import './annonce.css';
-import ListeAnnonces from './listeAnnoncePost/listeAnnonce';
-import ListeAnnoncesBuy from './listeAnnonceBuy/listeAnnonceBuy';
+import ListeAnnonces from './listAnnoncePost/listAnnonce';
+import ListeAnnoncesBuy from './listAnnonceBuy/listAnnonceBuy';
 import axios from 'axios';
 
-// @ts-ignore
-function PopupAnnonce({ userId }) {
+function PopupAnnonce({ userId }:{userId:string}) {
   const [open, setOpen] = useState(false);
   const [annoncesAchetees, setAnnoncesAchetees] = useState<ModelAnnonceBuy[]>([]);
   const [annoncesPubliees, setAnnoncesPubliees] = useState<ModelAnnonce[]>([]);
   const [affichageAnnonces, setAffichageAnnonces] = useState('achetees');
-  const [titre, setTitre] = useState('Annonces achetées'); // Ajout de la variable titre
+  const [titre, setTitre] = useState('Annonces achetées');
 
   const handleOpen = () => {
     setOpen(true);

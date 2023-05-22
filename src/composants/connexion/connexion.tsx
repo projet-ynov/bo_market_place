@@ -7,14 +7,10 @@ function Connexion() {
   const [email, setEmail] = useState("");
   const [emailExist, setEmailExist] = useState(false);
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
-
-  const handleRememberMeChange = () => setRememberMe(!rememberMe);
 
   const navigate = useNavigate();
 
-  // @ts-ignore
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
 
     setEmailExist(false)
@@ -34,16 +30,11 @@ function Connexion() {
       });
       navigate("/app/users");
     }
-    catch (e) {
-      // @ts-ignore
+    catch (e:any) {
       if (e.response.request.response.includes("email")) {
         setEmailExist(true)
       }
     }
-  };
-
-  const handleForgotPassword = () => {
-
   };
 
   return (
