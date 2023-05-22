@@ -49,6 +49,7 @@ function ListeAnnonces({ annonces }: ListeAnnoncesProps) {
             id: annonceId
           }
         });
+        window.location.reload()
       } catch (error) {
         console.error("Erreur lors de la suppression de l'annonce :", error);
         alert("Erreur lors de la suppression de l'annonce : " + error);

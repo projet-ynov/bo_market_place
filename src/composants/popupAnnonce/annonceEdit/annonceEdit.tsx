@@ -33,8 +33,8 @@ function AnnonceEdit({ annonceId }: { annonceId: string }
     };
 
 
-    // @ts-ignore
-    const handleSubmit = async (event) => {
+
+    const handleSubmit = async (event:any) => {
         event.preventDefault();
         try {
             await axios.put(`http://localhost:3000/annonce/${annonceId}`, {
