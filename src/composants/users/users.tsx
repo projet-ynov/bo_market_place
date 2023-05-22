@@ -133,9 +133,7 @@ function Users() {
                                             <PopupEdition userId={user._id} />
                                         </TableCell>
                                         <TableCell align="center">
-                                            <TableCell align="center">
                                                 <button className="button-delete" onClick={() => deleteUser(user._id)}>Supprimer</button>
-                                            </TableCell>
                                         </TableCell>
                                     </StyledTableRow>
                                 ))}
