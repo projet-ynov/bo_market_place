@@ -27,11 +27,9 @@ function Header() {
 
   useEffect(() => {
     socket.on('connect', () => {
-      console.log('Connected to the WebSocket server');
     });
 
     socket.on('new-ticket', () => {
-      console.log('New ticket received');
       setHasNewTickets(true); // Set the new tickets flag when receiving a new ticket
     });
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './users.css';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -74,7 +74,6 @@ function Users() {
                 date,
             };
 
-            console.log('Emitting ticket message');
             socket.emit('ticket', message);
 
             setTitle('');

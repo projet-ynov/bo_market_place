@@ -30,7 +30,6 @@ function Connexion() {
         const admin = response.data.admin;
         sessionStorage.setItem('token', JSON.stringify(token));
         sessionStorage.setItem('admin', JSON.stringify(admin));
-        console.log(token);
 
       });
       navigate("/app/users");
@@ -44,7 +43,7 @@ function Connexion() {
   };
 
   const handleForgotPassword = () => {
-    console.log("Redirection vers la page de réinitialisation de mot de passe");
+
   };
 
   return (

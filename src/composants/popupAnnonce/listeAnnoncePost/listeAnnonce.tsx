@@ -55,7 +55,7 @@ function ListeAnnonces({ annonces }: ListeAnnoncesProps) {
 
       }
     } else {
-      console.log("Impossible de supprimer l'annonce. Elle est vendue.");
+
       alert("Impossible de supprimer l'annonce. Elle est vendue.");
 
     }

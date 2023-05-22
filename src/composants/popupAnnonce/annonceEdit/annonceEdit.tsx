@@ -123,7 +123,6 @@ function AnnonceEdit({ annonceId }: { annonceId: string }
                             image: imageData
                         }
                         setImages([...images, newImage]);
-                        console.log(images);
                     }, 500)
                 }
             }
@@ -134,7 +133,6 @@ function AnnonceEdit({ annonceId }: { annonceId: string }
     const deleteImage = (index: number) => {
         let img = [...images];
         img.splice(index, 1)
-        console.log(img)
         setImages(img)
     }
 
