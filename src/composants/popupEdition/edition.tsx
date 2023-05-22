@@ -33,7 +33,6 @@ function PopupEdition({ userId }) {
             }).then((response) => {
                 const token = response.data.message;
                 sessionStorage.setItem('id', JSON.stringify(token));
-                console.log(token);
                 window.location.reload(); // Rafraîchir la page
             });
             navigate("/app/users");

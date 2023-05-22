@@ -38,7 +38,6 @@ function PopupAnnonce({ userId }) {
     try {
       const response = await axios.get(`http://localhost:3000/buy/myBuy/${userId}`);
       const data = response.data;
-      console.log(data);
       setAnnoncesAchetees(data);
     } catch (error) {
       console.error('Erreur lors de la récupération des annonces achetées :', error);
@@ -57,7 +56,6 @@ function PopupAnnonce({ userId }) {
           }
         });
         const data = response.data;
-        console.log(data);
         setAnnoncesPubliees(data);
       }
     } catch (error) {

@@ -63,11 +63,9 @@ function Tickets() {
     setSocket(newSocket);
 
     newSocket.on('connect', () => {
-      console.log('Connecté au serveur websocket');
     });
 
     newSocket.on('new-ticket', (message: any) => {
-      console.log('Nouveau message reçu :', message);
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
@@ -103,7 +101,6 @@ function Tickets() {
         const adminString = sessionStorage.getItem("admin");
         const admin: AdminModel = adminString ? JSON.parse(adminString) : null;
         const reservedBy = admin?._id;
-        console.log(reservedBy);
         const updatedMessages = messages.map((message) => {
           if (message._id === ticketId) {
             return {
@@ -114,7 +111,6 @@ function Tickets() {
           return message;
         });
         setMessages(updatedMessages);
-        console.log(ticketId, reservedBy);
         // Appelez votre API pour mettre à jour le ticket dans la base de données avec la propriété reservedBy
         axios.put(`http://localhost:3000/message/updateMessage/${ticketId}`, { reservedBy: reservedBy });
       }

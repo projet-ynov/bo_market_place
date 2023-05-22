@@ -39,7 +39,6 @@ type ListeAnnoncesProps = {
 
 function ListeAnnonces({ annonces }: ListeAnnoncesProps) {
   const typeAnnonce = sessionStorage.getItem('typeAnnonce');
-  console.log("-->", typeAnnonce)
   return (
     <div className="tableAnnonce">
       <TableContainer component={Paper}>
