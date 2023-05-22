@@ -62,6 +62,16 @@ function Users() {
         }
     };
 
+    const deleteUser = async (userId: string) => {
+        try {
+            await axios.delete(`http://localhost:3000/deleteUser/${userId}`);
+            fetchUsers();
+            console.log(`Utilisateur avec l'ID ${userId} supprimé.`);
+        } catch (error) {
+            console.error('Erreur lors de la suppression de l\'utilisateur:', error);
+        }
+    };
+
     const sendMessage = () => {
         const userId = '645d2661a5eb455459ce61b0';
         const date = new Date();
@@ -98,6 +108,7 @@ function Users() {
                                     <StyledTableCell align="center">Ville</StyledTableCell>
                                     <StyledTableCell align="center">Annonces</StyledTableCell>
                                     <StyledTableCell align="center">Edition</StyledTableCell>
+                                    <StyledTableCell align="center">Delete</StyledTableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -121,6 +132,11 @@ function Users() {
                                         </TableCell>
                                         <TableCell align="center">
                                             <PopupEdition userId={user._id} />
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            <TableCell align="center">
+                                                <button className="button-delete" onClick={() => deleteUser(user._id)}>Supprimer</button>
+                                            </TableCell>
                                         </TableCell>
                                     </StyledTableRow>
                                 ))}

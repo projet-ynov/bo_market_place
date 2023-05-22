@@ -3,9 +3,9 @@
     max-height: 100px;
     width: 100px;
     height: 100px;
-    margin: 0%!important;
+    margin: 0% !important;
     border-radius: 180px;
-  }  
+}
 
 .users {
     display: flex;
@@ -36,9 +36,18 @@
 }
 
 .button-edition {
+    background-color: #b4a308 !important;
+    border: none;
+}
+
+.button-delete {
     background-color: #da4906;
 }
 
 .colomn {
     text-align: center;
+}
+
+td{
+    border-bottom: none!important   ;
 }
